@@ -18,9 +18,7 @@ const SearchInput = (props, debounceTimeout=300) => {
       setFetching(true);
 
       let options = await searchAirports(searchValue);
-      setOptions((options.data || []).filter((airportOption) => {
-        return airportOption.navigation.entityType == "AIRPORT";
-      }));
+      setOptions((options.data || []));
       setFetching(false);
     };
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AirportInput from '../components/AirportInput';
+import CabinClassPicker from '../components/CabinClassPicker';
 
 const HomePage = () => {
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
+  const [cabinClass, setCabinClass] = useState("economy");
 
   useEffect(() => {
     if (origin && destination && origin.skyId == destination.skyId) {
@@ -29,6 +31,9 @@ const HomePage = () => {
         placeholder="Where to?"
         targetAirport={destination}
         airportMutator={setDestination}
+      />
+      <CabinClassPicker
+        setCabinClass={setCabinClass}
       />
     </div>
   );
