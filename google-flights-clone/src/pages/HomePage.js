@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AirportInput from '../components/AirportInput';
 import TravelDatesPicker from '../components/TravelDatesPicker';
 import CabinClassPicker from '../components/CabinClassPicker';
+import HeadCountCollapsible from '../components/HeadCountCollapsible';
 
 const HomePage = () => {
   const [origin, setOrigin] = useState(null);
@@ -9,6 +10,9 @@ const HomePage = () => {
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [cabinClass, setCabinClass] = useState("economy");
+  const [adultsCount, setAdultsCount] = useState(1);
+  const [childrenCount, setChildrenCount] = useState(0);
+  const [infantsCount, setInfantsCount] = useState(0);
 
   useEffect(() => {
     if (origin && destination && origin.skyId == destination.skyId) {
@@ -41,6 +45,12 @@ const HomePage = () => {
       />
       <CabinClassPicker
         setCabinClass={setCabinClass}
+      />
+      <HeadCountCollapsible
+        passengerCount={adultsCount + childrenCount + infantsCount}
+        setAdultsCount={setAdultsCount}
+        setChildrenCount={setChildrenCount}
+        setInfantsCount={setInfantsCount}
       />
     </div>
   );
