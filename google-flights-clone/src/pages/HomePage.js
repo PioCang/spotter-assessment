@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AirportInput from '../components/AirportInput';
 
 const HomePage = () => {
-  const [origin, setOrigin] = useState({
-    value: "",
-    skyID: "",
-    entityID: "",
-  });
-  const [destination, setDestination] = useState({
-    value: "",
-    skyID: "",
-    entityID: "",
-  });
+  const [origin, setOrigin] = useState(null);
+  const [destination, setDestination] = useState(null);
 
+  useEffect(() => {
+    if (origin && destination && origin.skyId == destination.skyId) {
+      setDestination(null);
+    }
+  }, [origin]);
+
+  useEffect(() => {
+    if (origin && destination && origin.skyId == destination.skyId) {
+      setOrigin(null);
+    }
+  }, [destination]);
 
   return (
     <div className="home-page">
       <h1>Flight Search</h1>
       <AirportInput
         placeholder="Where from?"
-        style={{width: 500}}
+        targetAirport={origin}
+        airportMutator={setOrigin}
       />
       <AirportInput
         placeholder="Where to?"
-        style={{width: 500}}
+        targetAirport={destination}
+        airportMutator={setDestination}
       />
     </div>
   );
