@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import AirportInput from '../components/AirportInput';
+import TravelDatesPicker from '../components/TravelDatesPicker';
 import CabinClassPicker from '../components/CabinClassPicker';
 
 const HomePage = () => {
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
   const [cabinClass, setCabinClass] = useState("economy");
 
   useEffect(() => {
@@ -31,6 +34,10 @@ const HomePage = () => {
         placeholder="Where to?"
         targetAirport={destination}
         airportMutator={setDestination}
+      />
+      <TravelDatesPicker
+        setDepartureDate={setDepartureDate}
+        setReturnDate={setReturnDate}
       />
       <CabinClassPicker
         setCabinClass={setCabinClass}
