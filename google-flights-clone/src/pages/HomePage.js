@@ -3,6 +3,10 @@ import AirportInput from '../components/AirportInput';
 import TravelDatesPicker from '../components/TravelDatesPicker';
 import CabinClassPicker from '../components/CabinClassPicker';
 import HeadCountCollapsible from '../components/HeadCountCollapsible';
+import FlightResults from '../components/FlightResults';
+import { SearchOutlined } from '@ant-design/icons';
+
+import { Button, Flex } from 'antd';
 
 const HomePage = () => {
   const [origin, setOrigin] = useState(null);
@@ -27,32 +31,45 @@ const HomePage = () => {
   }, [destination]);
 
   return (
-    <div className="home-page">
-      <h1>Flight Search</h1>
-      <AirportInput
-        placeholder="Where from?"
-        targetAirport={origin}
-        airportMutator={setOrigin}
-      />
-      <AirportInput
-        placeholder="Where to?"
-        targetAirport={destination}
-        airportMutator={setDestination}
-      />
-      <TravelDatesPicker
-        setDepartureDate={setDepartureDate}
-        setReturnDate={setReturnDate}
-      />
-      <CabinClassPicker
-        setCabinClass={setCabinClass}
-      />
-      <HeadCountCollapsible
-        passengerCount={adultsCount + childrenCount + infantsCount}
-        setAdultsCount={setAdultsCount}
-        setChildrenCount={setChildrenCount}
-        setInfantsCount={setInfantsCount}
-      />
-    </div>
+    <>
+      <div className="home-page">
+        <h1>Flight Search</h1>
+        <Flex wrap gap="small">
+          <HeadCountCollapsible
+            passengerCount={adultsCount + childrenCount + infantsCount}
+            setAdultsCount={setAdultsCount}
+            setChildrenCount={setChildrenCount}
+            setInfantsCount={setInfantsCount}
+          />
+          <CabinClassPicker
+            setCabinClass={setCabinClass}
+          />
+        </Flex>
+        <AirportInput
+          placeholder="Where from?"
+          targetAirport={origin}
+          airportMutator={setOrigin}
+        />
+        <AirportInput
+          placeholder="Where to?"
+          targetAirport={destination}
+          airportMutator={setDestination}
+        />
+        <TravelDatesPicker
+          setDepartureDate={setDepartureDate}
+          setReturnDate={setReturnDate}
+        />
+        <Button
+          type="primary"
+          icon={<SearchOutlined />}
+          iconPosition={"end"}
+        >
+            Search
+        </Button>
+      </div>
+      <div>
+      </div>
+    </>
   );
 };
 
