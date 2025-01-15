@@ -24,12 +24,14 @@ const HomePage = () => {
     if (origin && destination && origin.skyId === destination.skyId) {
       setDestination("");
     }
+  // eslint-disable-next-line
   }, [origin]);
 
   useEffect(() => {
     if (origin && destination && origin.skyId === destination.skyId) {
       setOrigin("");
     }
+  // eslint-disable-next-line
   }, [destination]);
 
 
@@ -66,7 +68,7 @@ const HomePage = () => {
       adultsCount < 1,
     ]
 
-    return invalid_conditions.find((cond) => cond == true);
+    return invalid_conditions.find((cond) => cond === true);
   }
 
   return (
