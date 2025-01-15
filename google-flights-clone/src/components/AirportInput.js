@@ -34,8 +34,11 @@ const SearchInput = (props, debounceTimeout=300) => {
   useEffect(() => {
     if (props.targetAirport === null && value) {
       setValue(null);
-      setOptions([]);
+    } else if (props.targetAirport !== null && value !== props.targetAirport.presentation.suggestionTitle) {
+      setValue(props.targetAirport.presentation.suggestionTitle);
     }
+
+    setOptions([]);
   }, [props.targetAirport]);
 
   return (
@@ -56,6 +59,7 @@ const SearchInput = (props, debounceTimeout=300) => {
           title: index,
         }))
       }
+      status={props.conflictingAirports ? "error" : ""}
     />
   );
 };

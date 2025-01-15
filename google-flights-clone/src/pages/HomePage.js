@@ -20,30 +20,27 @@ const HomePage = () => {
   const [flightResults, setFlightResults] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
 
-  useEffect(() => {
-    if (origin && destination && origin.skyId === destination.skyId) {
-      setDestination("");
+  const swapOriginAndDestination = async () => {
+    let temp = {...origin}
+    let newOriginAirport = {...destination}
+    let newDestinationAirport = temp;
+
+    if (! areSearchParamsInvalid()){
+      fetchFlightResults(newOriginAirport, newDestinationAirport);
     }
-  // eslint-disable-next-line
-  }, [origin]);
+    setOrigin(newOriginAirport);
+    setDestination(newDestinationAirport);
+  };
 
-  useEffect(() => {
-    if (origin && destination && origin.skyId === destination.skyId) {
-      setOrigin("");
-    }
-  // eslint-disable-next-line
-  }, [destination]);
-
-
-  const fetchFlightResults = async () => {
+  const fetchFlightResults = async (originAirport, destinationAirport) => {
     setFlightResults([]);
     setIsFetching(true);
 
     let query_payload = {
-      "originSkyId": origin.skyId,
-      "destinationSkyId": destination.skyId,
-      "originEntityId": origin.entityId,
-      "destinationEntityId": destination.entityId,
+      "originSkyId": originAirport.skyId,
+      "destinationSkyId": destinationAirport.skyId,
+      "originEntityId": originAirport.entityId,
+      "destinationEntityId": destinationAirport.entityId,
       "date": departureDate,
       "returnDate": returnDate,
       "cabinClass": cabinClass,
@@ -64,6 +61,7 @@ const HomePage = () => {
     let invalid_conditions = [
       origin === null,
       destination === null,
+      origin?.skyId === destination?.skyId,
       departureDate === "",
       adultsCount < 1,
     ]
@@ -91,17 +89,20 @@ const HomePage = () => {
             placeholder="Where from?"
             targetAirport={origin}
             airportMutator={setOrigin}
+            conflictingAirports={origin !== null && destination !== null && origin?.skyId === destination?.skyId}
           />
           <Tooltip title="Swap Airports">
             <Button
               shape="circle"
               icon={<SwapOutlined />}
+              onClick={swapOriginAndDestination}
             />
           </Tooltip>
           <AirportInput
             placeholder="Where to?"
             targetAirport={destination}
             airportMutator={setDestination}
+            conflictingAirports={origin !== null && destination !== null && origin?.skyId === destination?.skyId}
           />
         </Flex>
         <TravelDatesPicker
@@ -112,7 +113,7 @@ const HomePage = () => {
           type="primary"
           icon={<SearchOutlined />}
           iconPosition={"end"}
-          onClick={fetchFlightResults}
+          onClick={() => {fetchFlightResults(origin, destination)}}
           disabled={areSearchParamsInvalid()}
           loading={isFetching}
         >
