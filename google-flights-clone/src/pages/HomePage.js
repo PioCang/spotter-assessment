@@ -4,9 +4,8 @@ import TravelDatesPicker from '../components/TravelDatesPicker';
 import CabinClassPicker from '../components/CabinClassPicker';
 import HeadCountCollapsible from '../components/HeadCountCollapsible';
 import FlightResults from '../components/FlightResults';
-import { SearchOutlined } from '@ant-design/icons';
-
-import { Button, Flex } from 'antd';
+import { SearchOutlined, SwapOutlined } from '@ant-design/icons';
+import { Button, Flex, Tooltip } from 'antd';
 
 const HomePage = () => {
   const [origin, setOrigin] = useState(null);
@@ -50,6 +49,12 @@ const HomePage = () => {
           targetAirport={origin}
           airportMutator={setOrigin}
         />
+        <Tooltip title="Swap Airports">
+          <Button
+            shape="circle"
+            icon={<SwapOutlined />}
+          />
+        </Tooltip>
         <AirportInput
           placeholder="Where to?"
           targetAirport={destination}
