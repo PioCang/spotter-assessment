@@ -14,10 +14,13 @@ const axiosInstance = axios.create({
 });
 
 // Function to fetch flights based on parameters
-export const searchFlights = async (origin, destination, date) => {
+export const searchFlights = async (query_params) => {
+  const url = `/api/v2/flights/searchFlightsWebComplete`;
+  const params = new URLSearchParams(query_params);
+  console.log(query_params);
+
   try {
-    const url = `/api/v2/flights/searchFlightsWebComplete`;
-    const response = await axiosInstance.get(url);
+    const response = await axiosInstance.get(`${url}?${params.toString()}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching flight data", error);

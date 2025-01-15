@@ -23,7 +23,7 @@ const SearchInput = (props, debounceTimeout=300) => {
     };
 
     return debounce(loadAirportOptions, debounceTimeout);
-  }, [searchAirports, debounceTimeout]);
+  }, [fetching, searchAirports, debounceTimeout]);
 
   const handleSelectionMade = (selectedValue) => {
     setValue(selectedValue);
@@ -32,7 +32,7 @@ const SearchInput = (props, debounceTimeout=300) => {
   };
 
   useEffect(() => {
-    if (props.targetAirport == null && value) {
+    if (props.targetAirport === null && value) {
       setValue(null);
       setOptions([]);
     }

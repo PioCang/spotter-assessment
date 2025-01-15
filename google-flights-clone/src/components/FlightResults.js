@@ -1,23 +1,22 @@
 import React from 'react';
-
-const FlightResults = ({ flights }) => {
-  if (!flights || flights.length === 0) {
-    return <p>No flights found. Try adjusting your search.</p>;
-  }
-
-  return (
-    <div className="flight-results">
-      {flights.map((flight, index) => (
-        <div key={index} className="flight-card">
-          <h3>{flight.MinPrice} USD</h3>
-          <p>From: {flight.QuoteDateTime}</p>
-          <p>Origin: {flight.OriginPlace}</p>
-          <p>Destination: {flight.DestinationPlace}</p>
-          <p>Airline: {flight.Airline}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
-
+import { Collapse, Divider } from 'antd';
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+const FlightResults = () => (
+  <>
+    <Collapse
+      size="large"
+      items={[
+        {
+          key: '1',
+          label: 'This is large size panel header',
+          children: <p>{text}</p>,
+        },
+      ]}
+    />
+  </>
+);
 export default FlightResults;
