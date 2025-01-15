@@ -1,17 +1,11 @@
 import React, { useState }from 'react';
 import { Collapse} from 'antd';
 import FlightResultsEntryHeader from './FlightResultsEntryHeader';
+import FlightResultsEntryBody from './FlightResultsEntryBody';
 
 
 const FlightResults = (props) => {
   const [expandedPanelKeys, setExpandedPanelKeys] = useState([]);
-
-
-  const build_flight_body = (flightData) => {
-    return (
-      "body here"
-    );
-  };
 
   const build_collapsible_entry = (flightResult, index) => {
     return {
@@ -20,7 +14,9 @@ const FlightResults = (props) => {
         flightData={flightResult}
         isExpanded={expandedPanelKeys.includes(index.toString())}
       />,
-      children: "test,"// build_flight_body(),
+      children: <FlightResultsEntryBody
+        flightData={flightResult}
+      />,
     };
   };
 

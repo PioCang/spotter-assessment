@@ -6,7 +6,6 @@ const FlightResultsEntryHeader = (props) => {
   const routingInfo = props.flightData.legs[0];
   const departure = new Date(routingInfo.departure);
   const arrival = new Date(routingInfo.arrival);
-  const isNextDayArrival = arrival.getDate() > departure.getDate();
   const durationInHours = Math.floor(routingInfo.durationInMinutes / 60);
   const durationExtraMinutes = routingInfo.durationInMinutes % 60;
 
@@ -24,7 +23,7 @@ const FlightResultsEntryHeader = (props) => {
               {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               -
               {arrival.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-              {isNextDayArrival ? "(+1)" : ""}
+              {routingInfo.timeDeltaInDays > 0 ? `(+${routingInfo.timeDeltaInDays})` : ""}
               <br/>
               {routingInfo.carriers.marketing[0].name}
           </Flex>
