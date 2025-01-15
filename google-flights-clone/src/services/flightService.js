@@ -17,7 +17,6 @@ const axiosInstance = axios.create({
 export const searchFlights = async (query_params) => {
   const url = `/api/v2/flights/searchFlightsWebComplete`;
   const params = new URLSearchParams(query_params);
-  console.log(query_params);
 
   try {
     const response = await axiosInstance.get(`${url}?${params.toString()}`);

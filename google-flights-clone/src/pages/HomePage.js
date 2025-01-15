@@ -18,6 +18,7 @@ const HomePage = () => {
   const [childrenCount, setChildrenCount] = useState(0);
   const [infantsCount, setInfantsCount] = useState(0);
   const [flightResults, setFlightResults] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     if (origin && destination && origin.skyId === destination.skyId) {
@@ -33,6 +34,9 @@ const HomePage = () => {
 
 
   const fetchFlightResults = async () => {
+    setFlightResults([]);
+    setIsFetching(true);
+
     let query_payload = {
       "originSkyId": origin.skyId,
       "destinationSkyId": destination.skyId,
@@ -44,10 +48,14 @@ const HomePage = () => {
       "adults": adultsCount,
       "childrens": childrenCount,
       "infants": infantsCount,
+      "currency": "PHP",
+      "sortBy": "price_high",
     }
 
-    let flightResults = await searchFlights(query_payload);
-    setFlightResults(flightResults.itineraries);
+    let results = await searchFlights(query_payload);
+    setIsFetching(false);
+    setFlightResults(results.data.itineraries);
+    console.log(results.data.itineraries);
   }
 
   const areSearchParamsInvalid = () => {
@@ -104,6 +112,7 @@ const HomePage = () => {
           iconPosition={"end"}
           onClick={fetchFlightResults}
           disabled={areSearchParamsInvalid()}
+          loading={isFetching}
         >
             Search
         </Button>

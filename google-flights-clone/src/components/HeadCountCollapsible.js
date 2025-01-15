@@ -5,6 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 const HeadCountCollapsible = (props) => (
   <Collapse
     style={{width: 200}}
+    expandIconPosition="end"
     size="small"
     defaultActiveKey={[]}
     items={[
