@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Row, Col, Image, Flex, Timeline } from 'antd';
+import { Timeline } from 'antd';
 
 
 const FlightResultsEntryBody = (props) => {

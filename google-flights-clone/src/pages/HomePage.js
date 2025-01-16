@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AirportInput from '../components/AirportInput';
 import TravelDatesPicker from '../components/TravelDatesPicker';
 import CabinClassPicker from '../components/CabinClassPicker';
@@ -120,11 +120,14 @@ const HomePage = () => {
             Search
         </Button>
       </div>
-      <div>
-        <FlightResults
-          flightResults={flightResults}
-        />
-      </div>
+      {
+        (flightResults || []).length > 0 &&
+        <div>
+          <FlightResults
+            flightResults={flightResults}
+          />
+        </div>
+      }
     </>
   );
 };
