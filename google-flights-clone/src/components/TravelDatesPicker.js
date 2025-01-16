@@ -9,13 +9,11 @@ const TravelDatesPicker = (props) => {
   };
 
   return (
-    <DatePicker.RangePicker
-      placeholder={["Departure", "Return"]}
-      allowEmpty={[false, true]}
+    <DatePicker
+      placeholder={"Travel Date"}
       disabledDate={disabledDates}
       onChange={(date, dateString) => {
-        props.setDepartureDate(dateString[0]);
-        props.setReturnDate(dateString[1]);
+        props.setDepartureDate(dateString);
       }}
     />
   );

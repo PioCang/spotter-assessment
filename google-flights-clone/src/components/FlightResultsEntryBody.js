@@ -18,18 +18,20 @@ const FlightResultsEntryBody = (props) => {
 
 
     return (
-      <>
+      <div className='mb-10'>
         <hr/>
-        {layoverInHrs > 0 && `${layoverInHrs} hr `}
-        {layoverInMins > 0 && `${layoverInMins} min`}
-        {" layover · "}
-        {`${nextSegment.origin.name} (${nextSegment.origin.flightPlaceId})`}
-        { isOvernightLayover
-          ? " · Overnight layover"
-          : ""
-        }
+        <div className='my-2'>
+          {layoverInHrs > 0 && `${layoverInHrs} hr `}
+          {layoverInMins > 0 && `${layoverInMins} min`}
+          {" layover · "}
+          {`${nextSegment.origin.name} (${nextSegment.origin.flightPlaceId})`}
+          { isOvernightLayover
+            ? " · Overnight layover"
+            : ""
+          }
+        </div>
         <hr/>
-      </>
+      </div>
     )
   }
 
@@ -59,7 +61,7 @@ const FlightResultsEntryBody = (props) => {
           }
         </div>
         <div>
-          <p>
+          <p className='mb-2'>
             {segment.marketingCarrier.name}
             {" · "}
             {`${segment.marketingCarrier.displayCode} ${segment.flightNumber}`}

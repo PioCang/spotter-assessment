@@ -12,13 +12,13 @@ const FlightResultsEntryHeader = (props) => {
   const dataWhenCollapsed = () => {
     return (
       <>
-        <Col span={2}>
+        <Col xs={6} sm={4} md={2}>
           <Image
             width={50}
             src={routingInfo.carriers.marketing[0].logoUrl}
           />
         </Col>
-        <Col span={6}>
+        <Col xs={0} sm={0} md={6}>
           <Flex gap="middle">
               {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               -
@@ -28,25 +28,37 @@ const FlightResultsEntryHeader = (props) => {
               {routingInfo.carriers.marketing[0].name}
           </Flex>
         </Col>
-        <Col span={4}>
-          {durationInHours > 0 && `${durationInHours} hr `}
-          {durationExtraMinutes > 0 && `${durationExtraMinutes} min`}
-          <br/>
+        <Col xs={10} sm={10} md={4}>
+          <span className="hidden md:block">
+            {durationInHours > 0 && `${durationInHours} hr `}
+            {durationExtraMinutes > 0 && `${durationExtraMinutes} min`}
+            <br/>
+          </span>
+          <span className="block md:hidden">
+              {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+              -
+              {arrival.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+              {routingInfo.timeDeltaInDays > 0 ? `(+${routingInfo.timeDeltaInDays})` : ""}
+              <br/>
+          </span>
           {`${routingInfo.origin.id} - ${routingInfo.destination.id}`}
         </Col>
-        <Col span={4}>
+        <Col xs={0} sm={0} md={4}>
           {routingInfo.stopCount === 0
             ? "Nonstop"
             : `${routingInfo.stopCount} Stop${routingInfo.stopCount > 1 ? "s" : ""}`
           }
         </Col>
-        <Col span={4}>
-          <Button color="default" variant="outlined">
+        <Col xs={0} sm={6} md={4}>
+          <Button color="default" variant="outlined" className='hidden sm:block'>
             Select Flight
           </Button>
         </Col>
-        <Col span={4}>
+        <Col xs={8} sm={4} md={4}>
           {props.flightData.price.formatted}
+          <Button color="default" variant="outlined" className='block sm:hidden'>
+            Select
+          </Button>
         </Col>
       </>
     )
@@ -55,26 +67,29 @@ const FlightResultsEntryHeader = (props) => {
   const dataWhenExpanded = () => {
     return (
       <>
-        <Col span={2}>
+        <Col xs={6} sm={4} md={2}>
           <Image
             width={50}
             src={routingInfo.carriers.marketing[0].logoUrl}
           />
         </Col>
-        <Col span={14}>
+        <Col xs={10} sm={10}  md={14}>
           <Flex gap="middle">
               {departure.toLocaleDateString([], {weekday: "short"})}
               {", "}
               {departure.toLocaleDateString([], {day: 'numeric', month: 'short'})}
           </Flex>
         </Col>
-        <Col span={4}>
-          <Button color="default" variant="outlined">
+        <Col xs={0} sm={6} md={4}>
+          <Button color="default" variant="outlined" className='hidden sm:block'>
             Select Flight
           </Button>
         </Col>
-        <Col span={4}>
+        <Col xs={8} sm={4} md={4}>
           {props.flightData.price.formatted}
+          <Button color="default" variant="outlined" className='block sm:hidden'>
+            Select
+          </Button>
         </Col>
       </>
     )

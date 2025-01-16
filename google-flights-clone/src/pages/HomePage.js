@@ -12,7 +12,6 @@ const HomePage = () => {
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
   const [departureDate, setDepartureDate] = useState("");
-  const [returnDate, setReturnDate] = useState("");
   const [cabinClass, setCabinClass] = useState("economy");
   const [adultsCount, setAdultsCount] = useState(1);
   const [childrenCount, setChildrenCount] = useState(0);
@@ -42,7 +41,7 @@ const HomePage = () => {
       "originEntityId": originAirport.entityId,
       "destinationEntityId": destinationAirport.entityId,
       "date": departureDate,
-      "returnDate": returnDate,
+      "returnDate": "",
       "cabinClass": cabinClass,
       "adults": adultsCount,
       "childrens": childrenCount,
@@ -76,8 +75,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="home-page">
-        <h1>Flight Search</h1>
+      <div className="home-page m-12">
         <Flex wrap gap="middle">
           <HeadCountCollapsible
             passengerCount={adultsCount + childrenCount + infantsCount}
@@ -89,7 +87,7 @@ const HomePage = () => {
             setCabinClass={setCabinClass}
           />
         </Flex>
-        <Flex wrap gap="middle">
+        <Flex wrap gap="middle" className='my-2'>
           <AirportInput
             placeholder="Where from?"
             targetAirport={origin}
@@ -110,24 +108,25 @@ const HomePage = () => {
             conflictingAirports={origin !== null && destination !== null && origin?.skyId === destination?.skyId}
           />
         </Flex>
-        <TravelDatesPicker
-          setDepartureDate={setDepartureDate}
-          setReturnDate={setReturnDate}
-        />
-        <Button
-          type="primary"
-          icon={<SearchOutlined />}
-          iconPosition={"end"}
-          onClick={() => {fetchFlightResults(origin, destination)}}
-          disabled={areSearchParamsInvalid()}
-          loading={isFetching}
-        >
-            Search
-        </Button>
+        <Flex wrap gap="middle" className='my-2'>
+          <TravelDatesPicker
+            setDepartureDate={setDepartureDate}
+          />
+          <Button
+            type="primary"
+            icon={<SearchOutlined />}
+            iconPosition={"end"}
+            onClick={() => {fetchFlightResults(origin, destination)}}
+            disabled={areSearchParamsInvalid()}
+            loading={isFetching}
+          >
+              Search
+          </Button>
+        </Flex>
       </div>
       {
         (flightResults || []).length > 0 &&
-        <div>
+        <div className='m-2 md:m-8'>
           <FlightResults
             flightResults={flightResults}
           />
