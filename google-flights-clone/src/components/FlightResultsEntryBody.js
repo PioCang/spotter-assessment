@@ -51,7 +51,7 @@ const FlightResultsEntryBody = (props) => {
     const durationExtraMinutes = segment.durationInMinutes % 60;
 
     return (
-      <>
+      <div key={index}>
         <div>
           {index === 0
             ? ""
@@ -90,7 +90,7 @@ const FlightResultsEntryBody = (props) => {
             ]}
           />
         </div>
-      </>
+      </div>
     );
   };
 

@@ -53,8 +53,13 @@ const HomePage = () => {
 
     let results = await searchFlights(query_payload);
     setIsFetching(false);
-    setFlightResults(results.data.itineraries);
-    console.log(results.data.itineraries);
+
+    // Handle inconsistent API
+    let flightResultsData = results.data.itineraries;
+    if (flightResultsData.hasOwnProperty("key")) {
+      flightResultsData = flightResultsData.results;
+    }
+    setFlightResults(flightResultsData);
   }
 
   const areSearchParamsInvalid = () => {
