@@ -1,0 +1,39 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.flight-search {
+  display: flex;
+  gap: 10px;
+}
+
+.flight-search input {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.flight-search button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.flight-results {
+  margin-top: 20px;
+}
+
+.flight-card {
+  padding: 15px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.flight-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.flight-card p {
+  margin: 5px 0;
+}
