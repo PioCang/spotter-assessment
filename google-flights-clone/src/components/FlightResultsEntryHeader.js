@@ -19,14 +19,17 @@ const FlightResultsEntryHeader = (props) => {
           />
         </Col>
         <Col xs={0} sm={0} md={6}>
-          <Flex gap="middle">
-              {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-              -
-              {arrival.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-              {routingInfo.timeDeltaInDays > 0 ? `(+${routingInfo.timeDeltaInDays})` : ""}
-              <br/>
-              {routingInfo.carriers.marketing[0].name}
-          </Flex>
+          <p className='font-bold'>
+            {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+            -
+            {arrival.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+            <sup>
+              {routingInfo.timeDeltaInDays > 0 ? `+${routingInfo.timeDeltaInDays}` : ""}
+            </sup>
+          </p>
+          <p>
+            {routingInfo.carriers.marketing[0].name}
+          </p>
         </Col>
         <Col xs={10} sm={10} md={4}>
           <span className="hidden md:block">

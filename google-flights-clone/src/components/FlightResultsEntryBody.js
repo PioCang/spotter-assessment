@@ -73,7 +73,7 @@ const FlightResultsEntryBody = (props) => {
                   children: <div>
                     {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     <sup>
-                      {getDaysElapsedIndicator(firstFlightDeparture, arrival) > 0
+                      {getDaysElapsedIndicator(firstFlightDeparture, arrival) > 0 && index !== 0
                         ? `+${getDaysElapsedIndicator(firstFlightDeparture, arrival)}`
                         : ""}
                     </sup>
