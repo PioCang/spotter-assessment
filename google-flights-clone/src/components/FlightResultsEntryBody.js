@@ -72,19 +72,29 @@ const FlightResultsEntryBody = (props) => {
                   color: 'gray',
                   children: <div>
                     {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                    {getDaysElapsedIndicator(firstFlightDeparture, departure) > 0 ? `(+${getDaysElapsedIndicator(firstFlightDeparture, departure)})` : ""}
+                    <sup>
+                      {getDaysElapsedIndicator(firstFlightDeparture, arrival) > 0
+                        ? `+${getDaysElapsedIndicator(firstFlightDeparture, arrival)}`
+                        : ""}
+                    </sup>
                     {" · "}
                     {`${segment.origin.name} (${segment.origin.flightPlaceId})`}
                     <br/>
-                    Travel time: {durationInHours > 0 && `${durationInHours} hr `}
-                    {durationExtraMinutes > 0 && `${durationExtraMinutes} min`}
+                    <span className='text-gray-500'>
+                      Travel time: {durationInHours > 0 && `${durationInHours} hr `}
+                      {durationExtraMinutes > 0 && `${durationExtraMinutes} min`}
+                    </span>
                   </div>,
               },
               {
                 color: 'gray',
                 children: <div>
                 {arrival.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                {getDaysElapsedIndicator(firstFlightDeparture, arrival) > 0 ? `(+${getDaysElapsedIndicator(firstFlightDeparture, arrival)})` : ""}
+                <sup>
+                  {getDaysElapsedIndicator(firstFlightDeparture, arrival) > 0
+                    ? `+${getDaysElapsedIndicator(firstFlightDeparture, arrival)}`
+                    : ""}
+                </sup>
                 {" · "}
                 {`${segment.destination.name} (${segment.destination.flightPlaceId})`}
               </div>,

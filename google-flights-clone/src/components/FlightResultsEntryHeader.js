@@ -34,14 +34,20 @@ const FlightResultsEntryHeader = (props) => {
             {durationExtraMinutes > 0 && `${durationExtraMinutes} min`}
             <br/>
           </span>
-          <span className="block md:hidden">
+          <span className="block md:hidden font-bold">
               {departure.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+              <br className='block sm:hidden'/>
               -
+              <br className='block sm:hidden'/>
               {arrival.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-              {routingInfo.timeDeltaInDays > 0 ? `(+${routingInfo.timeDeltaInDays})` : ""}
+              <sup>
+                {routingInfo.timeDeltaInDays > 0 ? `+${routingInfo.timeDeltaInDays}` : ""}
+              </sup>
               <br/>
           </span>
-          {`${routingInfo.origin.id} - ${routingInfo.destination.id}`}
+          <span className='text-gray-500'>
+            {`${routingInfo.origin.id} - ${routingInfo.destination.id}`}
+          </span>
         </Col>
         <Col xs={0} sm={0} md={4}>
           {routingInfo.stopCount === 0
@@ -55,7 +61,9 @@ const FlightResultsEntryHeader = (props) => {
           </Button>
         </Col>
         <Col xs={8} sm={4} md={4}>
-          {props.flightData.price.formatted}
+          <span className='font-bold'>
+            {props.flightData.price.formatted}
+          </span>
           <Button color="default" variant="outlined" className='block sm:hidden'>
             Select
           </Button>
@@ -86,7 +94,9 @@ const FlightResultsEntryHeader = (props) => {
           </Button>
         </Col>
         <Col xs={8} sm={4} md={4}>
-          {props.flightData.price.formatted}
+          <span className='font-bold'>
+            {props.flightData.price.formatted}
+          </span>
           <Button color="default" variant="outlined" className='block sm:hidden'>
             Select
           </Button>

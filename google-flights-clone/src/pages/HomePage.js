@@ -99,6 +99,7 @@ const HomePage = () => {
               shape="circle"
               icon={<SwapOutlined />}
               onClick={swapOriginAndDestination}
+              className='rotate-90 sm:rotate-0'
             />
           </Tooltip>
           <AirportInput
